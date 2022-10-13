@@ -1,29 +1,32 @@
+import { useState } from "react";
+
 const Content = () => {
+  // "Khalid" will be the default name when the page firts loads
+  // setName is concidered as the setter for the new name
+  const [name, setName] = useState("Khalid");
+  const [count, setCount] = useState(0);
+
   const handleNameChange = () => {
     const names = ["Bob", "Kevin", "Khalid"];
     // Gets a number between 0 and 2
     const int = Math.floor(Math.random() * 3);
-    return names[int];
+    setName(names[int]);
   };
 
   const handleClick = () => {
-    console.log("You clicked it");
+    setCount(count + 1);
+    console.log(count);
   };
-  const handleClick2 = (name) => {
-    console.log(`${name} was clicked`);
-  };
-  const handleClick3 = (e) => {
-    console.log(e.target.innerText);
+  const handleClick2 = () => {
+    console.log(count);
   };
 
-  // Notice how we do not add () to the onClick functions
-  // We do that so the function are not called on load, and are only called on click
   return (
     <main>
-      <p onDoubleClick={handleClick}>Hello {handleNameChange()}!</p>
+      <p onDoubleClick={handleClick}>Hello {name}!</p>
+      <button onClick={handleNameChange}>Change Name</button>
       <button onClick={handleClick}>Click It</button>
-      <button onClick={() => handleClick2("Dave")}>Click It</button>
-      <button onClick={(e) => handleClick3(e)}>Click It</button>
+      <button onClick={handleClick2}>Click It</button>
     </main>
   );
 };
